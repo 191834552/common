@@ -5,6 +5,7 @@
 ## 安装
 
 ```
+
 $ composer require ibrand/common:~1.0 -vvv
 $ php artisan vendor:publish --provider="iBrand\DatabaseLogger\ServiceProvider" 
 ```
