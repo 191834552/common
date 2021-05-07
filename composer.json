@@ -1,5 +1,5 @@
 {
-	"name": "ibrand1/common",
+	"name": "ibrand/common",
 	"type": "library",
 	"description": "iBrand common server.",
 	"keywords": [
@@ -10,8 +10,8 @@
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "luguohua",
-			"email": "admin@345k.net"
+			"name": "shjchen",
+			"email": "ibrand.shjchen@foxmail.com"
 		}
 	],
 	"require": {
