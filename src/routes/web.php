@@ -9,4 +9,3 @@
  * file that was distributed with this source code.
  */
 
-Route::get('goods/share/view', 'GoodsController@shareView')->name('goods.share.view');
