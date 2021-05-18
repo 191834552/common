@@ -19,12 +19,13 @@ use Schema;
 
 class CommonServiceProvider extends ServiceProvider
 {
+
 	public function boot()
 	{
 		if (!$this->app->routesAreCached()) {
 
 			Route::prefix(api_prefix())
-				->middleware(['api', 'cors'])
+				->middleware(['api'])
 				->get('wechat/jssdkconfig', [
 					'uses' => '\iBrand\Common\Controllers\WechatController@getJsConfig',
 					'as'   => 'api.wechat.getJsConfig',
@@ -33,6 +34,7 @@ class CommonServiceProvider extends ServiceProvider
 
 		$this->publishes([
 			__DIR__ . '/../config/app.php' => config_path('ibrand/app.php'),
+			__DIR__ . '/../config/oss.php' => config_path('ibrand/oss.php'),
 		]);
 
 		//set https default.
@@ -43,4 +45,9 @@ class CommonServiceProvider extends ServiceProvider
 		//set utm8bm4 for mysql database.
 		Schema::defaultStringLength(191);
 	}
+
+    public function register()
+    {
+        $this->app->register(RouteServiceProvider::class);
+    }
 }
