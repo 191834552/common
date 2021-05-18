@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 
 class OssUploadController extends Controller
 {
-
+    public function getPrefix($fileType,$prefix="")
+    {
+        return sprintf('%s/%s',$prefix,$fileType);
+    }
     public function signature(Request $request)
     {
         /**
@@ -18,15 +21,22 @@ class OssUploadController extends Controller
          * 3. 回调自定义参数，oss 回传应用服务器时会带上
          * 4. 当前直传配置链接有效期
          */
-        $disk = \Storage::disk('oss');
-        $ext = $request->ext;
+        $fileName = $request->fileName;
         $fileType = $request->fileType;
+        $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+        $dir = $this->getPrefix($fileType,config('filesystems.disks.oss.root'));
+
+        if ($request->dirFormat == 'date'){
+            $dir.= '/'.date('Y-m-d');
+        }
+
+        $disk = \Storage::disk('oss');
         $config = $disk->signatureConfig(
-            $prefix = config('filesystems.disks.oss.root' . $fileType) . '/',
+            $prefix = $dir,
             $callBackUrl = '',
             $customData = ['uniqName' => md5(uniqid()) . '.' . $ext],
             $expire = 30, 1024 * 1024 * 1024 * 5);
-        return response()->json(json_decode($config, 1));
+        return $this->success(json_decode($config, 1));
     }
 
     public function callbackVerify($id)
