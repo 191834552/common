@@ -27,7 +27,7 @@ class OssUploadController extends Controller
         $dir = $this->getPrefix($fileType,config('filesystems.disks.oss.root'));
 
         if ($request->dirFormat == 'date'){
-            $dir.= '/'.date('Y-m-d');
+            $dir.= '/'.date('Ymd');
         }
 
         $disk = \Storage::disk('oss');
