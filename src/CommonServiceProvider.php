@@ -34,7 +34,6 @@ class CommonServiceProvider extends ServiceProvider
 
 		$this->publishes([
 			__DIR__ . '/../config/app.php' => config_path('ibrand/app.php'),
-			__DIR__ . '/../config/oss.php' => config_path('ibrand/oss.php'),
 		]);
 
 		//set https default.

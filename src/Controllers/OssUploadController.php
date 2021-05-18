@@ -22,7 +22,7 @@ class OssUploadController extends Controller
         $ext = $request->ext;
         $fileType = $request->fileType;
         $config = $disk->signatureConfig(
-            $prefix = config('ibrand.oss.directory.' . $fileType) . '/',
+            $prefix = config('filesystems.disks.oss.root' . $fileType) . '/',
             $callBackUrl = '',
             $customData = ['uniqName' => md5(uniqid()) . '.' . $ext],
             $expire = 30, 1024 * 1024 * 1024 * 5);
